@@ -1,4 +1,4 @@
-﻿namespace HuffmanCod
+﻿namespace HuffmanCoding
 {
     class HuffmanNodeBase
     {
