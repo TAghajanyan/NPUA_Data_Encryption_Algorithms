@@ -62,8 +62,7 @@ namespace Server
                     Broadcast(dataFromClient + " Joined ", dataFromClient, false);
 
                     Console.WriteLine(dataFromClient + " Joined chat ");
-                    HandleClinet client = new HandleClinet();
-                    client.StartClient(clientSocket, dataFromClient, clientsList);
+                    HandleClinet.StartClient(clientSocket, dataFromClient, clientsList);
                 }
             }
 

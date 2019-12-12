@@ -5,22 +5,22 @@ using System.Collections;
 
 namespace Server
 {
-    public class HandleClinet
+    public static class HandleClinet
     {
-        TcpClient clientSocket;
-        string clNo;
-        Hashtable clientsList;
+        static TcpClient clientSocket;
+        static string clNo;
+        static Hashtable clientsList;
 
-        public void StartClient(TcpClient inClientSocket, string clineNo, Hashtable cList)
+        public static void StartClient(TcpClient inClientSocket, string clineNo, Hashtable cList)
         {
-            this.clientSocket = inClientSocket;
-            this.clNo = clineNo;
-            this.clientsList = cList;
+            clientSocket = inClientSocket;
+            clNo = clineNo;
+            clientsList = cList;
             Thread ctThread = new Thread(DoChat);
             ctThread.Start();
         }
 
-        private void DoChat()
+        private static void DoChat()
         {
             int requestCount = 0;
             byte[] bytesFrom = new byte[65536];
