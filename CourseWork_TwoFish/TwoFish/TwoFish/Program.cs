@@ -5,18 +5,18 @@ using System.Text;
 
 namespace TwoFish
 {
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.Title = "TwoFish";
             var inputText = Console.ReadLine();
 
             var bIn = Encoding.UTF8.GetBytes(inputText);
-            byte[] key = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}; // 128bit key
-            byte[] iv = {16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; // initialization vector 
+            byte[] key = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }; // 128bit key
+            byte[] iv = { 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }; // initialization vector 
 
-            using (var algorithm = new TwofishManaged {KeySize = key.Length * 8, Mode = CipherMode.CBC})
+            using (var algorithm = new TwofishManaged { KeySize = key.Length * 8, Mode = CipherMode.CBC })
             {
                 byte[] encrypted;
 

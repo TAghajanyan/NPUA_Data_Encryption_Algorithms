@@ -24,12 +24,12 @@ namespace TwoFish
         public TwofishImplementation(IReadOnlyList<uint> key, IReadOnlyList<uint> iv, CipherMode cipherMode)
         {
             _key = new DWord[key.Count];
-            for (var i = 0; i < _key.Length; i++) _key[i] = (DWord) key[i];
+            for (var i = 0; i < _key.Length; i++) _key[i] = (DWord)key[i];
 
             if (iv != null)
             {
                 _iv = new DWord[iv.Count];
-                for (var i = 0; i < _iv.Length; i++) _iv[i] = (DWord) iv[i];
+                for (var i = 0; i < _iv.Length; i++) _iv[i] = (DWord)iv[i];
             }
 
             _cipherMode = cipherMode;
@@ -77,8 +77,8 @@ namespace TwoFish
             for (var i = 0; i < subkeyCnt / 2; i++)
             {
                 // compute round subkeys for PHT
-                var a = F32((DWord) (i * SubkeyStep), k32E, keyLen); // A uses even key dwords
-                var b = F32((DWord) (i * SubkeyStep + SubkeyBump), k32O, keyLen); // B uses odd  key dwords
+                var a = F32((DWord)(i * SubkeyStep), k32E, keyLen); // A uses even key dwords
+                var b = F32((DWord)(i * SubkeyStep + SubkeyBump), k32O, keyLen); // B uses odd  key dwords
                 b = RotateLeft(b, 8);
                 _subKeys[2 * i] = a + b; // combine with a PHT
                 _subKeys[2 * i + 1] = RotateLeft(a + 2 * b, SubkeyRotateLeft);
@@ -202,18 +202,18 @@ namespace TwoFish
         {
             if (keyLen >= 256)
             {
-                x.B0 = (byte) (P8X8[P04, x.B0] ^ k32[3].B0);
-                x.B1 = (byte) (P8X8[P14, x.B1] ^ k32[3].B1);
-                x.B2 = (byte) (P8X8[P24, x.B2] ^ k32[3].B2);
-                x.B3 = (byte) (P8X8[P34, x.B3] ^ k32[3].B3);
+                x.B0 = (byte)(P8X8[P04, x.B0] ^ k32[3].B0);
+                x.B1 = (byte)(P8X8[P14, x.B1] ^ k32[3].B1);
+                x.B2 = (byte)(P8X8[P24, x.B2] ^ k32[3].B2);
+                x.B3 = (byte)(P8X8[P34, x.B3] ^ k32[3].B3);
             }
 
             if (keyLen >= 192)
             {
-                x.B0 = (byte) (P8X8[P03, x.B0] ^ k32[2].B0);
-                x.B1 = (byte) (P8X8[P13, x.B1] ^ k32[2].B1);
-                x.B2 = (byte) (P8X8[P23, x.B2] ^ k32[2].B2);
-                x.B3 = (byte) (P8X8[P33, x.B3] ^ k32[2].B3);
+                x.B0 = (byte)(P8X8[P03, x.B0] ^ k32[2].B0);
+                x.B1 = (byte)(P8X8[P13, x.B1] ^ k32[2].B1);
+                x.B2 = (byte)(P8X8[P23, x.B2] ^ k32[2].B2);
+                x.B3 = (byte)(P8X8[P33, x.B3] ^ k32[2].B3);
             }
 
             if (keyLen >= 128)
@@ -344,12 +344,12 @@ namespace TwoFish
                 for (var i = 0; i < 256; i++)
                 {
                     m1[0] = P8X8[0, i]; // compute all the matrix elements 
-                    mX[0] = (byte) Mx_X(m1[0]);
-                    mY[0] = (byte) Mx_Y(m1[0]);
+                    mX[0] = (byte)Mx_X(m1[0]);
+                    mY[0] = (byte)Mx_Y(m1[0]);
 
                     m1[1] = P8X8[1, i];
-                    mX[1] = (byte) Mx_X(m1[1]);
-                    mY[1] = (byte) Mx_Y(m1[1]);
+                    mX[1] = (byte)Mx_X(m1[1]);
+                    mY[1] = (byte)Mx_Y(m1[1]);
 
                     MdsTable[0, i].B0 = m1[1];
                     MdsTable[0, i].B1 = mX[1];
@@ -396,12 +396,12 @@ namespace TwoFish
                 for (var j = 0; j < 4; j++)
                 {
                     // shift one byte at a time 
-                    var b = (byte) (r >> 24);
-                    var g2 = (byte) ((b << 1) ^ ((b & 0x80) > 0 ? RsGfFdbk : 0));
-                    var g3 = (byte) (((b >> 1) & 0x7F) ^ ((b & 1) > 0 ? RsGfFdbk >> 1 : 0) ^ g2);
-                    r.B3 = (byte) (r.B2 ^ g3);
-                    r.B2 = (byte) (r.B1 ^ g2);
-                    r.B1 = (byte) (r.B0 ^ g3);
+                    var b = (byte)(r >> 24);
+                    var g2 = (byte)((b << 1) ^ ((b & 0x80) > 0 ? RsGfFdbk : 0));
+                    var g3 = (byte)(((b >> 1) & 0x7F) ^ ((b & 1) > 0 ? RsGfFdbk >> 1 : 0) ^ g2);
+                    r.B3 = (byte)(r.B2 ^ g3);
+                    r.B2 = (byte)(r.B1 ^ g2);
+                    r.B1 = (byte)(r.B0 ^ g3);
                     r.B0 = b;
                 }
             }

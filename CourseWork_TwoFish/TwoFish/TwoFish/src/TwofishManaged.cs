@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-// ReSharper disable ThreadStaticFieldHasInitializer
-
 namespace TwoFish
 {
     public sealed class TwofishManaged : SymmetricAlgorithm
@@ -15,8 +13,8 @@ namespace TwoFish
             KeySizeValue = 256;
             BlockSizeValue = 128;
             FeedbackSizeValue = BlockSizeValue;
-            LegalBlockSizesValue = new[] {new KeySizes(128, 128, 0)};
-            LegalKeySizesValue = new[] {new KeySizes(128, 256, 64)};
+            LegalBlockSizesValue = new[] { new KeySizes(128, 128, 0) };
+            LegalKeySizesValue = new[] { new KeySizes(128, 256, 64) };
 
             base.Mode = CipherMode.CBC; // same as default
             base.Padding = PaddingMode.PKCS7;

@@ -30,7 +30,7 @@ namespace TwoFish
 
         public static explicit operator uint(DWord expr) => expr.Value;
 
-        public static explicit operator DWord(int value) => new DWord((uint) value);
+        public static explicit operator DWord(int value) => new DWord((uint)value);
 
         public static explicit operator DWord(uint value) => new DWord(value);
 

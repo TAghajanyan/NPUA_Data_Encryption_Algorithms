@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
-
 namespace TwoFish
 {
     public sealed class TwofishManagedTransform : ICryptoTransform
@@ -188,15 +187,15 @@ namespace TwoFish
                 switch (_paddingMode)
                 {
                     case PaddingMode.PKCS7:
-                    {
-                        paddedLength = inputCount / 16 * 16 + 16; // to round to next whole block
-                        paddedInputBuffer = new byte[paddedLength];
-                        paddedInputOffset = 0;
-                        Buffer.BlockCopy(inputBuffer, inputOffset, paddedInputBuffer, 0, inputCount);
-                        var added = (byte) (paddedLength - inputCount);
-                        for (var i = inputCount; i < inputCount + added; i++) paddedInputBuffer[i] = added;
-                        break;
-                    }
+                        {
+                            paddedLength = inputCount / 16 * 16 + 16; // to round to next whole block
+                            paddedInputBuffer = new byte[paddedLength];
+                            paddedInputOffset = 0;
+                            Buffer.BlockCopy(inputBuffer, inputOffset, paddedInputBuffer, 0, inputCount);
+                            var added = (byte)(paddedLength - inputCount);
+                            for (var i = inputCount; i < inputCount + added; i++) paddedInputBuffer[i] = added;
+                            break;
+                        }
 
                     case PaddingMode.Zeros:
                         paddedLength = (inputCount + 15) / 16 * 16; // to round to next whole block
@@ -206,16 +205,16 @@ namespace TwoFish
                         break;
 
                     default:
-                    {
-                        if (inputCount % 16 != 0)
-                            throw new ArgumentOutOfRangeException(nameof(inputCount),
-                                "Invalid input count for a given padding.");
+                        {
+                            if (inputCount % 16 != 0)
+                                throw new ArgumentOutOfRangeException(nameof(inputCount),
+                                    "Invalid input count for a given padding.");
 
-                        paddedLength = inputCount;
-                        paddedInputBuffer = inputBuffer;
-                        paddedInputOffset = inputOffset;
-                        break;
-                    }
+                            paddedLength = inputCount;
+                            paddedInputBuffer = inputBuffer;
+                            paddedInputOffset = inputOffset;
+                            break;
+                        }
                 }
 
                 var outputBuffer = new byte[paddedLength];
